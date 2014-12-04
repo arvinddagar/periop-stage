@@ -1,0 +1,24 @@
+%h1 Listing assessments
+
+%table{:class => "table table-striped table-bordered" }
+  %thead
+    %tr
+      %th Status
+      %th Type
+      %th
+  %tbody
+    - @assessments.each do |assessment|
+      %tr
+        %td= assessment.status
+        %td= assessment.name
+        %td
+          -if @patient
+            = link_to( 'Show', patient_assessment_path(@patient,assessment))
+          -#- else
+          -#  = link_to 'Show', assessment
+
+
+%br
+%p
+  - if (can? :edit, @patient) && !@patient.patient_assessment_assigned?
+    =link_to('Find patient assessment', unassigned_patient_assessments_path(@patient))

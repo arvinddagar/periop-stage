@@ -1,0 +1,28 @@
+= render('patients/nav')
+
+=render 'detailed_info'
+- if can? :edit, @patient
+  = link_to 'Edit patient information', edit_patient_path(@patient)
+%h3 Pre-op information
+%p
+  =link_to('Show Pre-op Summary ',patient_summary_path(@patient))
+%h3 Add operations or assessments
+%p
+- if (can? :edit, @patient) && !@patient.patient_assessment_assigned?
+  %ul.unstyled
+    %li
+      =link_to('Find patient assessment', unassigned_patient_assessments_path(@patient))
+    %li
+      =link_to('New clinician assessment', patient_loading_screen_path(@patient,:q => patient_clinician_assessment_form_path(@patient)))
+    %li
+      =link_to('New quick note', patient_note_assessment_form_path(@patient))
+
+%h3 Linked Assessments
+%p
+%p
+  %ul.unstyled
+    - @patient.assessments_to_display.each do |a|
+      %li #{link_to (a.summary), patient_assessment_path(@patient, a)}
+
+= render('patients/nav')
+

@@ -1,0 +1,13 @@
+%h3 Patient information
+%table.patient.table.table-condensed
+  %tr
+    %td
+      <b>Name:</b> #{@patient.surname}, #{@patient.firstname} #{@patient.middlename}      
+    %td
+      <b>Date of birth:</b> #{ @patient.dob}
+  - arr = patient_info_array @patient
+  - arr.each_with_index do |info,index|
+    - if index % 2 == 0
+      %tr
+    %td
+      <b>#{info[:name]}:</b> #{info[:value]}        

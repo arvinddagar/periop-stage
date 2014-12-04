@@ -1,0 +1,216 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require dataTables/jquery.dataTables
+ *= require dataTables/jquery.dataTables.bootstrap
+ *= require bootstrap-datepicker
+ *= require select2
+ *= require_tree .
+*/
+
+.content {
+  background-color: #eee;
+  padding: 20px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  -webkit-border-radius: 0 0 6px 6px;
+  -moz-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+@import "bootstrap";
+
+.question_details, textarea.question{
+  //@include makeColumn(10);
+  width: 90%;
+  margin-left: 0;
+}
+
+ li {
+   list-style: none ;
+ }
+
+
+
+// print features
+table#summary_printed td{
+  width: 30%;
+}
+
+//  @media only screen and (max-width: 800px) {
+//      table#assessments td:nth-child(6),
+//      table#assessments th:nth-child(6),
+//      table#assessments td:nth-child(7),
+//      table#assessments th:nth-child(7),
+//      table#assessments td:nth-child(10),
+//      table#assessments th:nth-child(10)
+//      {display: none;}
+//  }
+
+// Twitter bootstrap changes content sizes at 979px and 768px. "Responsive" http://twitter.github.io/bootstrap/customize.html
+// This way, the table decreases the number of columns once the page width is less than 979px.
+
+  @media only screen and (max-width: 980px) {
+    table#assessments td:nth-child(3),
+    table#assessments th:nth-child(3),
+    table#assessments td:nth-child(6),
+    table#assessments th:nth-child(6),
+    table#assessments td:nth-child(7),
+    table#assessments th:nth-child(7),
+    table#assessments td:nth-child(10),
+    table#assessments th:nth-child(10)
+    {display: none;}
+  }
+
+
+table#summary {
+  h3 {
+    font-size: 14px;
+    line-height: 150%;
+  }
+  tr td {
+    padding: 3px;
+    line-height: 125%;
+    font-size: 12px;
+  }
+}
+
+#main.print {
+  table {
+    border-width: 0px;
+    td{
+      padding: 0px;
+      border-width: 0px;
+      font-size: 12px;
+    }
+    td.category {
+      border-bottom: #555 solid 1px;
+    }
+  }
+  h3{
+    font-size: 12px;
+    line-height: 150%;
+  }
+  h3{
+    font-size: 12px;
+    line-height: 150%;
+  }
+  h4{
+    font-size: 12px;
+    line-height: 150%;
+  }
+  font-size: 12px;
+  line-height: 125%;
+  li{
+    font-size: 14px;
+  }
+}
+
+@media print{
+  .no-print{
+     display: none;
+  }
+
+}
+
+#welcome {
+
+  h1{
+  font-size: 100px
+  }
+  a{
+    font-size: 20px;
+  }
+}
+
+
+
+/* Smartphones small screens or devices ----------- */
+@media only screen and (max-width : 640px) {
+/* Styles */
+  #welcome {
+
+    h1{
+    font-size: 50px
+    }
+    a{
+      font-size: 20px;
+    }
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.centered {
+  text-align: center;
+}
+
+table.centered {
+  td,th {
+    text-align: center;
+  }
+
+}
+
+.privacy{
+  h2{
+    color: #357ae8;
+    font-size: 20px;
+  }
+}
+
+.loading {
+  background-image: url('ajax-loader.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 110px;
+          }
+
+@mixin formSelect2FieldState($textColor: #555, $borderColor: #ccc, $backgroundColor: #f5f5f5) {
+
+div.select2-container a {
+    color: $textColor;
+    border-color: $borderColor;
+    @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075)); // Redeclare so transitions work
+    &:focus {
+      border-color: darken($borderColor, 10%);
+      // Write out in full since the lighten() function isn't easily escaped
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($borderColor, 20%);
+         -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($borderColor, 20%);
+              box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($borderColor, 20%);
+    }
+  }
+}
+.control-group.error .controls {
+  @include formSelect2FieldState($errorText, $errorText, $errorBackground);
+}
+
+//td.category h3{
+//  text-align: center
+//}
+//
+//tr td.category {
+//  background-color: #CFC !important;
+//}
+

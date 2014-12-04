@@ -1,0 +1,47 @@
+-content_for :title do
+  -if !@patient.nil?
+    #{@patient.surname} #{@patient.firstname} #{@patient.dob}
+  -else
+    = @assessment.patient_assesment_title
+
+%h1 Pre-op summary
+Printed by #{current_user.professional.name} on #{Date.current.to_s}
+%table#summary_printed{:class => "table table-bordered" }
+  -#%thead
+  -#  %tr
+  -#    %th.summary-printed
+  -#    %th.summary-printed
+  -#    %th.summary-printed
+  %tbody
+    - @categories.each do |category|
+      - if !@summary[category._id].nil? && @summary[category._id].size > 0
+        %tr
+          %td{:colspan => 3,:class => "category"}
+            %h3=category.summary_display
+          - concept_arr = @summary[category._id][:array]
+          - rownum = @summary[category._id][:row_number]
+          - for row in 1 .. rownum
+            %tr
+            -for col in 0 .. 2
+              - index = col * rownum + row - 1
+              - concept_composite = concept_arr[index]
+              - if !concept_composite.nil? && !concept_composite[0].nil?
+                %td
+                  %strong
+                    =concept_composite[0][:concept_display_name]
+                  \:
+                  =printed_answer concept_composite
+              -else
+                %td
+    %tr
+      %td{:colspan =>3}
+        %h4 Summary preparation
+        %ul.unstyled
+          -if !@patient.nil?
+            - @patient.assessments.each do |a|
+              %li
+                = a.summary_preparation
+          -else
+            %li
+              = @assessment.summary_preparation
+= render('patients/nav')

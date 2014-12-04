@@ -1,0 +1,31 @@
+%h1 Patient Assessments
+= render('patients/nav')
+- if !@patient.nil?
+  =render 'patients/detailed_info'
+  - source = unassigned_patient_assessments_url(@patient,format: "json")
+- else
+  - source = unassigned_assessments_url(format: "json")
+%br
+%br
+%table#assessments{:data => {:source => source}, :class => "table table-striped table-bordered centered" }
+  %thead
+    %tr
+      %th Surname
+      %th Firstname
+      %th DOB
+      %th Form date
+      %th Surgery date
+      %th Surgeon
+      %th
+        %i.icon-list{:title => "Questionnaire"}
+      %th
+        %i.icon-folder-open{:title => "Assessment"}
+      %th
+        %i.icon-print{:title => "Printable"}
+      %th
+        %i.icon-plus{:title => "Join"}
+      %th
+        %i.icon-remove{:title => "Delete"}
+  %tbody
+%br
+= render('patients/nav')

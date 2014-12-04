@@ -1,0 +1,33 @@
+#welcome.hero-unit.centered
+  - if (Rails.application.config.environment_type == 'live')
+    %h1
+      = Rails.application.config.site_url
+    %br
+    %p
+      We help patients and doctors manage information for perioperative care.
+      %br
+      Please complete a confidential questionnaire to send it to your doctor.
+  - else
+    %h2
+      = Rails.application.config.site_url
+    %p
+      We help patients and doctors manage information for perioperative care.
+      %br
+      This is a demonstration site only and all data is regularly deleted. Please do not put confidential patient information into the site.
+      %br
+      You can fill out a Pre-op assessment, just like the one on the live server.  You can sign up with your email address or log in with 
+      %br
+      Username: demo@pre-op.net
+      %br
+      Password: demopassword
+  %br
+  %p
+    = form_tag(patient_assessment_form_path,:method => :get) do
+      .form-inputs
+      = label_tag "doctor", "Select your doctor from the list:"
+      = select_tag("doctor",options_from_collection_for_select(anesthetists_option_list,:slug,:name),:include_blank => true,:input_html => {:class => 'question anesthetist-select'})
+      %br
+      = submit_tag('Fill in assessment',:class=> "btn btn-success btn-large",:name => nil)
+-#
+- if user_signed_in? && !current_user.name.nil?
+  %p Logged in as: #{current_user.name + ' Role: ' +  current_user.user_role}

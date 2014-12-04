@@ -1,0 +1,16 @@
+= simple_form_for((@patient),:html => {:class => 'assessment' }) do |f|
+  = f.error_notification
+  = f.error :base, {:class => "alert alert-error"}
+  - form_disabled =false
+  .form-inputs
+    = f.simple_fields_for(setup_assessment(@patient.new_patient_assessment),:html => {:class => 'assessment' }, :defaults => {:disabled => form_disabled}) do |s|
+      = s.error_notification
+      = s.error :base, {:class => "alert alert-error"}
+      - @count = 0
+      = s.simple_fields_for :answers do |a|
+        = render "assessments/answer",:a => a
+  .form-actions
+    = f.submit "Continue"
+    = f.submit "Back", :name => "previous_button"  unless @patient.first_step?
+
+-#= debug @patient

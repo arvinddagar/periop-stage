@@ -1,0 +1,24 @@
+mongodb backup from heroku ?
+https://github.com/meskyanichi/backup/issues/213
+
+
+
+MONGOHQ_URL=mongodb://localhost/periop_production
+
+heroku run rake ADMIN_PASSWORD=secret db:populate
+
+heroku run rake db:parse
+
+http://bigtrapeze.com/2012/05/16/enabling-wildcard-ssl-on-a-heroku-rails-app/
+
+
+1 create s3 bucket from aws console
+2 heroku config:add S3_BACKUPS_BUCKET=_value_ S3_KEY_ID=_value_ S3_SECRET_KEY=_value_ MONGO_URL=_value_
+
+in the form
+5104613fc6756b00020001a8 477 patient_FIRST_NAME
+
+in asssessments
+504f8b6fb9576500020001a1 , 2
+
+http://stackoverflow.com/questions/9032287/session-timeout-message-in-ror-using-devise

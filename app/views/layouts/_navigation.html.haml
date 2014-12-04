@@ -1,0 +1,32 @@
+= link_to Rails.application.config.site_url, root_path, :class => 'brand'
+%ul.nav.pull-right
+  - if user_signed_in? && current_user.admin?
+    %li
+      = link_to('Questions managment', questions_path)
+    %li
+      = link_to('Patients managment', patients_path)
+    %li
+      = link_to('Professionals management', professionals_path)
+    %li
+      %a{:href => '#'}Logged in as admin: #{current_user.name}
+  - if user_signed_in?
+    - if current_user.professional?
+      %li
+        %a{:href => '#'}Logged in as professional: #{current_user.name}
+    %li
+      = link_to('Logout', destroy_user_session_path, :method=>'delete')
+  - else
+    %li
+      = link_to('Login', new_user_session_path)
+    - if Rails.application.config.registerable
+      %li
+        = link_to "Sign up", new_user_registration_path
+  - if user_signed_in?
+    %li
+      = link_to('Edit account', edit_user_registration_path)
+  %li
+    = link_to('Privacy', privacy_path)
+  %li
+    = link_to('Contact us', contact_path)
+
+-#Log in, Sign up, Privacy, Contact
